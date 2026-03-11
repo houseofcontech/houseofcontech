@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>House of ConTech — AECO Strategy & Advisory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0f0e0c;
+      --paper: #f5f2ec;
+      --gold: #b8923a;
+      --gold-light: #d4aa5a;
+      --muted: #7a7060;
+      --line: rgba(15,14,12,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 4rem;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 600; letter-spacing: 0.08em;
+      text-decoration: none; color: var(--ink);
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--muted);
+      font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.6rem 1.6rem; border: 1px solid var(--gold);
+      color: var(--gold); text-decoration: none; transition: all 0.25s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--paper); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 7rem 4rem 4rem; gap: 4rem;
+    }
+    .hero-text { max-width: 560px; }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-weight: 300; line-height: 1.05; margin-bottom: 1.8rem;
+    }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      font-size: 1.05rem; color: var(--muted); font-weight: 300;
+      line-height: 1.75; margin-bottom: 2.8rem; max-width: 440px;
+    }
+    .hero-actions { display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 0.9rem 2.4rem; background: var(--ink); color: var(--paper);
+      text-decoration: none; font-size: 0.82rem;
+      letter-spacing: 0.08em; text-transform: uppercase; transition: background 0.25s;
+    }
+    .btn-primary:hover { background: var(--gold); }
+    .btn-ghost {
+      font-size: 0.82rem; color: var(--muted); text-decoration: none;
+      letter-spacing: 0.06em; border-bottom: 1px solid transparent; transition: all 0.2s;
+    }
+    .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+
+    .hero-visual { position: relative; height: 560px; }
+    .hero-card { position: absolute; box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
+    .hero-card-main {
+      top: 0; left: 0; right: 0; bottom: 80px;
+      background: var(--ink);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 3rem; overflow: hidden;
+    }
+    .hero-card-main::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 280px; height: 280px;
+      border: 1px solid rgba(184,146,58,0.25); border-radius: 50%;
+    }
+    .hero-card-main::after {
+      content: ''; position: absolute; top: 40px; right: 40px;
+      width: 160px; height: 160px;
+      border: 1px solid rgba(184,146,58,0.15); border-radius: 50%;
+    }
+    .card-label {
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.8rem;
+    }
+    .card-stat {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem; font-weight: 300; color: white; line-height: 1.1;
+    }
+    .card-desc { font-size: 0.85rem; color: rgba(255,255,255,0.45); margin-top: 0.5rem; }
+    .hero-card-mini {
+      bottom: 0; right: 0; width: 65%;
+      background: var(--gold); padding: 1.5rem 2rem;
+    }
+    .mini-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; color: white; font-weight: 400; margin-bottom: 0.3rem;
+    }
+    .mini-sub { font-size: 0.78rem; color: rgba(255,255,255,0.7); }
+
+    /* ── EXPERIENCE BAR ── */
+    .exp-bar {
+      padding: 1.8rem 4rem;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      display: flex; align-items: center; gap: 4rem;
+    }
+    .exp-label {
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); white-space: nowrap; flex-shrink: 0;
+    }
+    .exp-list { display: flex; gap: 4rem; align-items: center; flex-wrap: wrap; }
+    .exp-item { display: flex; flex-direction: column; gap: 0.2rem; }
+    .exp-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem; color: var(--ink); letter-spacing: 0.04em; opacity: 0.7;
+    }
+    .exp-role {
+      font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); opacity: 0.7;
+    }
+
+    /* ── SHARED SECTION STYLES ── */
+    .section { padding: 6rem 4rem; }
+    .section-header { margin-bottom: 4rem; }
+    .taj-section-tag {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+    }
+    .taj-section-tag::before, .taj-section-tag::after {
+      content: ''; flex: none; width: 28px; height: 1px; background: var(--gold);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+
+    /* ── SERVICES ── */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+      border: 1px solid var(--line);
+    }
+    .service-item {
+      padding: 2.8rem; border-right: 1px solid var(--line);
+      transition: background 0.3s; cursor: default;
+    }
+    .service-item:last-child { border-right: none; }
+    .service-item:hover { background: white; }
+    .service-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem; color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem; font-weight: 400; margin-bottom: 1rem; line-height: 1.2;
+    }
+    .service-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+    .service-bullets { margin-top: 1rem; padding-left: 0; list-style: none; }
+    .service-bullets li {
+      font-size: 0.82rem; color: var(--muted); padding: 0.25rem 0;
+      padding-left: 1rem; position: relative;
+    }
+    .service-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
+
+    /* ── ABOUT — TAJ INSPIRED ── */
+    .about {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 85vh; background: var(--ink); color: var(--paper);
+    }
+    .about-left {
+      padding: 7rem 5rem;
+      display: flex; flex-direction: column; justify-content: center;
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+    .about-right {
+      padding: 7rem 5rem;
+      display: flex; flex-direction: column; justify-content: center;
+      background: #0a0908;
+    }
+    .about-eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 2.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .about-eyebrow::after { content: ''; flex: 1; height: 1px; background: rgba(184,146,58,0.3); }
+    .about-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 3.2vw, 3.4rem); font-weight: 300;
+      line-height: 1.18; margin-bottom: 2.2rem; color: var(--paper);
+    }
+    .about-title em { font-style: italic; color: var(--gold-light); }
+    .about-body { font-size: 0.9rem; color: rgba(245,242,236,0.55); line-height: 1.9; margin-bottom: 1.2rem; }
+    .taj-divider {
+      display: flex; align-items: center; gap: 1.2rem; margin: 2.5rem 0;
+    }
+    .taj-divider::before, .taj-divider::after {
+      content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.1);
+    }
+    .taj-divider-ornament { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
+    .about-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-style: italic; font-weight: 300;
+      color: rgba(245,242,236,0.45); line-height: 1.75;
+    }
+    .about-services-label {
+      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 2rem;
+    }
+    .about-services-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    .about-service-entry {
+      padding: 1.1rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: flex-start; gap: 0.9rem;
+    }
+    .about-service-entry:nth-child(odd) { padding-right: 1.5rem; border-right: 1px solid rgba(255,255,255,0.06); }
+    .about-service-entry:nth-child(even) { padding-left: 1.5rem; }
+    .about-service-entry:nth-last-child(-n+2) { border-bottom: none; }
+    .ase-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem; color: var(--gold); flex-shrink: 0; margin-top: 0.1rem; opacity: 0.7;
+    }
+    .ase-text { font-size: 0.82rem; color: rgba(245,242,236,0.6); line-height: 1.4; }
+
+    /* ── PROCESS ── */
+    .process-list { display: flex; flex-direction: column; border: 1px solid var(--line); }
+    .process-item {
+      display: grid; grid-template-columns: 80px 1fr 1fr;
+      align-items: center; gap: 2rem;
+      padding: 2rem 2.5rem; border-bottom: 1px solid var(--line); transition: background 0.2s;
+    }
+    .process-item:last-child { border-bottom: none; }
+    .process-item:hover { background: white; }
+    .process-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); font-weight: 300; }
+    .process-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; }
+    .process-desc { font-size: 0.85rem; color: var(--muted); }
+
+    /* ── INDUSTRY ── */
+    .industry-section { padding: 6rem 4rem; background: white; }
+    .speaking-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
+    .speaking-item { padding: 2rem; border: 1px solid var(--line); transition: background 0.2s; }
+    .speaking-item:hover { background: var(--paper); }
+    .speaking-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; margin-bottom: 0.5rem; }
+    .speaking-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── CTA ── */
+    .cta-section { padding: 7rem 4rem; text-align: center; }
+    .cta-ornament {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.2rem; margin-bottom: 2rem;
+    }
+    .cta-ornament::before, .cta-ornament::after {
+      content: ''; width: 60px; height: 1px; background: var(--gold); opacity: 0.4;
+    }
+    .cta-diamond { width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); }
+    .cta-tag { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1.5rem; }
+    .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; }
+    .cta-sub { font-size: 1rem; color: var(--muted); margin-bottom: 3rem; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .cta-actions { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 4rem; border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.08em; }
+    .footer-copy { font-size: 0.78rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { font-size: 0.78rem; color: var(--muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.7s ease both; }
+    .fade-up-d1 { animation-delay: 0.1s; }
+    .fade-up-d2 { animation-delay: 0.22s; }
+    .fade-up-d3 { animation-delay: 0.34s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; }
+      .hero-visual { height: 300px; }
+      .section { padding: 4rem 1.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service-item { border-right: none; border-bottom: 1px solid var(--line); }
+      .service-item:last-child { border-bottom: none; }
+      .about { grid-template-columns: 1fr; }
+      .about-left, .about-right { padding: 4rem 1.5rem; border-right: none; }
+      .about-services-list { grid-template-columns: 1fr; }
+      .about-service-entry:nth-child(odd) { border-right: none; padding-right: 0; }
+      .about-service-entry:nth-child(even) { padding-left: 0; }
+      .about-service-entry:nth-last-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .about-service-entry:last-child { border-bottom: none; }
+      .process-item { grid-template-columns: 50px 1fr; }
+      .process-desc { display: none; }
+      .exp-bar { padding: 1.5rem; gap: 2rem; }
+      .exp-list { gap: 2rem; }
+      .speaking-grid { grid-template-columns: 1fr; }
+      .industry-section { padding: 4rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+      .cta-section { padding: 4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">House of ConTech</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Book a Call</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-tag fade-up">AECO Technology Strategy & Advisory</span>
+      <h1 class="hero-title fade-up fade-up-d1">
+        Where<br><em>vision</em><br>meets growth.
+      </h1>
+      <p class="hero-sub fade-up fade-up-d2">
+        House of ConTech brings engineer-to-executive expertise to AECO technology companies and industry partners navigating strategy, market entry, and transformation. We don't just advise — we've done the work.
+      </p>
+      <div class="hero-actions fade-up fade-up-d3">
+        <a href="#contact" class="btn-primary">Book a Discovery Call</a>
+        <a href="#services" class="btn-ghost">See our services →</a>
+      </div>
+    </div>
+    <div class="hero-visual fade-up fade-up-d2">
+      <div class="hero-card hero-card-main">
+        <div class="card-label">Deep industry roots</div>
+        <div class="card-stat">15+ Years</div>
+        <div class="card-desc">of AECO expertise, executive relationships & market knowledge</div>
+      </div>
+      <div class="hero-card hero-card-mini">
+        <div class="mini-title">Trusted network</div>
+        <div class="mini-sub">Technology leaders, top ENR firms & public sector agencies</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE BAR -->
+  <div class="exp-bar">
+    <span class="exp-label">Experience from</span>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-name">Autodesk Inc.</span>
+        <span class="exp-role">Sr. Executive</span>
+      </div>
+      <div class="exp-item">
+        <span class="exp-name">Nemetschek Group</span>
+        <span class="exp-role">Strategic Advisor & Industry Development</span>
+      </div>
+      <div class="exp-item">
+        <span class="exp-name">WSP USA</span>
+        <span class="exp-role">Structural Engineer</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="section-header">
+      <div class="taj-section-tag">Our Expertise</div>
+      <h2 class="section-title">Advisory services built<br>for the <em>AECO industry</em></h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="service-num">01</div>
+        <h3 class="service-name">Strategy & Advisory</h3>
+        <p class="service-desc">Rigorous, executable strategy for technology companies and public agencies at critical inflection points — from market entry and competitive repositioning to public sector engagement and digital delivery initiatives.</p>
+        <ul class="service-bullets">
+          <li>Go-to-market strategy & market entry planning</li>
+          <li>Public sector engagement & agency partnership development</li>
+          <li>Private sector ENR firm strategy & client acquisition</li>
+          <li>Competitive positioning & ecosystem development</li>
+          <li>Open data, interoperability & digital delivery initiatives</li>
+          <li>M&A evaluation, investment advisory & cross-portfolio strategy</li>
+        </ul>
+      </div>
+      <div class="service-item">
+        <div class="service-num">02</div>
+        <h3 class="service-name">Fractional & Embedded Resources</h3>
+        <p class="service-desc">Senior-level expertise embedded within your organization for a defined engagement — delivering continuity, credibility, and results without the overhead of a permanent hire.</p>
+        <ul class="service-bullets">
+          <li>Fractional business development & industry leadership</li>
+          <li>Interim market development management</li>
+          <li>Technical-to-commercial translation & sales enablement</li>
+          <li>Pilot program design, facilitation & stakeholder management</li>
+          <li>Trade show representation & conference speaking support</li>
+        </ul>
+      </div>
+      <div class="service-item">
+        <div class="service-num">03</div>
+        <h3 class="service-name">Business Optimization</h3>
+        <p class="service-desc">A structured review of revenue operations, team performance, and organizational processes — identifying the friction points that constrain growth and building the infrastructure to eliminate them.</p>
+        <ul class="service-bullets">
+          <li>Business operations review & performance diagnostics</li>
+          <li>Revenue operations & CRM intelligence structuring</li>
+          <li>Sales cycle optimization & account retention strategy</li>
+          <li>Team development, hiring frameworks & talent enablement</li>
+          <li>Technology evaluation & platform selection advisory</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT — TAJ INSPIRED -->
+  <section class="about" id="about">
+    <div class="about-left">
+      <div class="about-eyebrow">About House of ConTech</div>
+      <h2 class="about-title">Built at the intersection of<br><em>engineering and commerce.</em></h2>
+      <p class="about-body">House of ConTech was founded on the belief that the most effective advisors in construction technology are those who have lived both sides of it — who can read a set of bridge plans and a P&L with equal fluency.</p>
+      <p class="about-body">With a foundation in structural engineering and a career spanning enterprise software, public sector sales, and executive advisory, we bring a rare combination of technical credibility and commercial acumen to every engagement.</p>
+      <div class="taj-divider"><div class="taj-divider-ornament"></div></div>
+      <p class="about-quote">"The gap between engineering and business is where most AECO technology companies lose. We close that gap."</p>
+    </div>
+    <div class="about-right">
+      <div class="about-services-label">— What we bring</div>
+      <div class="about-services-list">
+        <div class="about-service-entry">
+          <span class="ase-num">01</span>
+          <span class="ase-text">Executive Advisory & Strategic Execution</span>
+        </div>
+        <div class="about-service-entry">
+          <span class="ase-num">02</span>
+          <span class="ase-text">Business Optimization & Operational Performance Review</span>
+        </div>
+        <div class="about-service-entry">
+          <span class="ase-num">03</span>
+          <span class="ase-text">Private Sector Advisory & Strategic Client Development</span>
+        </div>
+        <div class="about-service-entry">
+          <span class="ase-num">04</span>
+          <span class="ase-text">Public Sector Client Engagement & Agency Relationship Management</span>
+        </div>
+        <div class="about-service-entry">
+          <span class="ase-num">05</span>
+          <span class="ase-text">Industry Relationship Management & Ecosystem Partnership Development</span>
+        </div>
+        <div class="about-service-entry">
+          <span class="ase-num">06</span>
+          <span class="ase-text">Market Intelligence & Industry-Aligned Marketing Strategy</span>
+        </div>
+        <div class="about-service-entry">
+          <span class="ase-num">07</span>
+          <span class="ase-text">Engineering Services Advisory & Technical Workflow Consultation</span>
+        </div>
+        <div class="about-service-entry">
+          <span class="ase-num">08</span>
+          <span class="ase-text">Technology Evaluation, Platform Assessment & Procurement Advisory</span>
+        </div>
+        <div class="about-service-entry">
+          <span class="ase-num">09</span>
+          <span class="ase-text">Trade Show Strategy, Conference Representation & Thought Leadership</span>
+        </div>
+        <div class="about-service-entry">
+          <span class="ase-num">10</span>
+          <span class="ase-text">Speaking Engagements & Industry Standards Participation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" id="process">
+    <div class="section-header">
+      <div class="taj-section-tag">How We Work</div>
+      <h2 class="section-title">Straightforward.<br><em>No bloat.</em></h2>
+    </div>
+    <div class="process-list">
+      <div class="process-item">
+        <div class="process-num">01</div>
+        <div class="process-name">Discovery Call</div>
+        <div class="process-desc">A 30–45 minute conversation to understand your situation. We ask direct questions. If we're not the right fit, we'll tell you.</div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">02</div>
+        <div class="process-name">Scoping & Proposal</div>
+        <div class="process-desc">A clear proposal with defined scope, deliverables, timeline, and fees. No surprises, no scope creep, no junior analysts.</div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">03</div>
+        <div class="process-name">Engagement</div>
+        <div class="process-desc">Deep work informed by real AECO industry experience — strategy, fractional embeds, or targeted advisory shaped around your context.</div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">04</div>
+        <div class="process-name">Delivery & Follow-Through</div>
+        <div class="process-desc">Work built to be implemented, not filed away. Ongoing access included for questions throughout and after every engagement.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRY PRESENCE -->
+  <section class="industry-section">
+    <div class="section-header">
+      <div class="taj-section-tag">Industry Presence</div>
+      <h2 class="section-title">Embedded in the<br><em>industry ecosystem</em></h2>
+    </div>
+    <div class="speaking-grid">
+      <div class="speaking-item">
+        <div class="speaking-name">Leading Tradeshows & Conferences</div>
+        <div class="speaking-desc">Active presenter and speaker at the most influential infrastructure and construction technology events across North America and internationally — where industry direction is shaped.</div>
+      </div>
+      <div class="speaking-item">
+        <div class="speaking-name">Top ENR Design Firms</div>
+        <div class="speaking-desc">Longstanding working relationships with the world's leading engineering and design consultancies, built through years of direct project collaboration and strategic advisory engagement.</div>
+      </div>
+      <div class="speaking-item">
+        <div class="speaking-name">Enterprise Platform Providers</div>
+        <div class="speaking-desc">Deep experience working alongside the sector's dominant technology platforms — understanding their ecosystems, roadmaps, and go-to-market strategies from the inside.</div>
+      </div>
+      <div class="speaking-item">
+        <div class="speaking-name">Startups & Emerging Ventures</div>
+        <div class="speaking-desc">Connected to the emerging layer of AECO innovation — startups, venture-backed firms, and disruptive technology companies redefining how infrastructure is designed, built, and managed.</div>
+      </div>
+      <div class="speaking-item">
+        <div class="speaking-name">Public Sector & Government Agencies</div>
+        <div class="speaking-desc">Established relationships with state and federal transportation agencies navigating digital transformation, procurement modernization, and technology adoption at scale.</div>
+      </div>
+      <div class="speaking-item">
+        <div class="speaking-name">Standards Bodies & Research Institutions</div>
+        <div class="speaking-desc">Active contributor to the organizations setting the future direction of open data, interoperability, and digital delivery standards across the global AECO industry.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contact">
+    <div class="cta-ornament"><div class="cta-diamond"></div></div>
+    <span class="cta-tag">Get Started</span>
+    <h2 class="cta-title">Let's talk about<br>your challenge.</h2>
+    <p class="cta-sub">Book a free 30-minute discovery call. Whether you need strategy, a fractional resource, or a sharp outside perspective — we'll find the right path together.</p>
+    <div class="cta-actions">
+      <a href="https://calendly.com/houseofcontech/30min" class="btn-primary" target="_blank">Book a Discovery Call</a>
+      <a href="mailto:houseofcontech@gmail.com" class="btn-ghost">Email us directly →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">House of ConTech</div>
+    <div class="footer-copy">© 2026 House of ConTech, LLC. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Conta
