@@ -288,6 +288,38 @@
     .cta-sub { font-size: 1rem; color: var(--muted); margin-bottom: 3rem; max-width: 520px; margin-left: auto; margin-right: auto; }
     .cta-actions { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
 
+    /* ── TALLY POPUP OVERLAY ── */
+    .tally-overlay {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(15,14,12,0.7); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 2rem;
+    }
+    .tally-overlay.active { display: flex; }
+    .tally-modal {
+      background: var(--paper); width: 100%; max-width: 620px;
+      max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+      position: relative; animation: fadeUp 0.35s ease both;
+    }
+    .tally-modal-header {
+      padding: 2rem 2.5rem 1.2rem;
+      border-bottom: 1px solid var(--line);
+      display: flex; justify-content: space-between; align-items: flex-start;
+    }
+    .tally-modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem; font-weight: 300; color: var(--ink); line-height: 1.1;
+    }
+    .tally-modal-title em { font-style: italic; color: var(--gold); }
+    .tally-modal-sub { font-size: 0.82rem; color: var(--muted); margin-top: 0.4rem; }
+    .tally-close {
+      background: none; border: none; cursor: pointer;
+      font-size: 1.4rem; color: var(--muted); line-height: 1;
+      padding: 0.2rem 0.4rem; transition: color 0.2s; flex-shrink: 0;
+    }
+    .tally-close:hover { color: var(--ink); }
+    .tally-frame-wrap iframe { width: 100%; border: none; display: block; min-height: 540px; }
+
     /* ── FOOTER ── */
     footer {
       padding: 2.5rem 4rem; border-top: 1px solid var(--line);
@@ -574,9 +606,31 @@
     <p class="cta-sub">Book a free 30-minute discovery call. Whether you need strategy, a fractional resource, or a sharp outside perspective — we'll find the right path together.</p>
     <div class="cta-actions">
       <a href="https://calendly.com/houseofcontech/30min" class="btn-primary" target="_blank">Book a Discovery Call</a>
-      <a href="mailto:houseofcontech@gmail.com" class="btn-ghost">Email us directly →</a>
+      <a href="#" class="btn-ghost" onclick="document.getElementById('tallyOverlay').classList.add('active'); return false;">Send us a message →</a>
     </div>
   </section>
+
+  <!-- TALLY POPUP OVERLAY -->
+  <div class="tally-overlay" id="tallyOverlay" onclick="if(event.target===this) this.classList.remove('active')">
+    <div class="tally-modal">
+      <div class="tally-modal-header">
+        <div>
+          <div class="tally-modal-title">Get in <em>touch.</em></div>
+          <div class="tally-modal-sub">We'll be in touch within 1–2 business days.</div>
+        </div>
+        <button class="tally-close" onclick="document.getElementById('tallyOverlay').classList.remove('active')">✕</button>
+      </div>
+      <div class="tally-frame-wrap">
+        <iframe src="https://tally.so/embed/A7JO1e?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="540" frameborder="0" marginheight="0" marginwidth="0" title="Contact Form"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') document.getElementById('tallyOverlay').classList.remove('active');
+    });
+  </script>
 
   <!-- FOOTER -->
   <footer>
@@ -585,4 +639,10 @@
     <div class="footer-links">
       <a href="#services">Services</a>
       <a href="#about">About</a>
-      <a href="#contact">Conta
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>
